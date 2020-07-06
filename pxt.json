@@ -1,0 +1,22 @@
+{
+    "name": "Room Scanner 3",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "robotbit": "github:leo266/la_motor_rgb#54126bb00678aaac4e986ab11933cc96d2872d5a",
+        "pxt-sonar": "github:microsoft/pxt-sonar#v0.0.5"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
