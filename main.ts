@@ -115,6 +115,7 @@ basic.forever(function () {
     )
     if (reading - prevReading > 10) {
         pins.digitalWritePin(DigitalPin.P1, 1)
+        stop()
         basic.pause(200)
         pins.digitalWritePin(DigitalPin.P1, 0)
     }
