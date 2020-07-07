@@ -105,19 +105,24 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-	
-})
-basic.forever(function () {
     reading = pins.analogReadPin(AnalogPin.P2)
     led.plotBarGraph(
     reading,
     1023
     )
-    if (reading - prevReading > 10) {
+    // 30 is an enough difference to avoid an engines sound effects .
+    if (reading - prevReading > 30) {
         pins.digitalWritePin(DigitalPin.P1, 1)
         stop()
-        basic.pause(200)
+        basic.pause(100)
         pins.digitalWritePin(DigitalPin.P1, 0)
+        moveBack()
+        basic.pause(100)
+        stop()
+        basic.pause(100)
     }
     prevReading = reading
+})
+basic.forever(function () {
+	
 })
