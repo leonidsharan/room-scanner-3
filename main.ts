@@ -51,12 +51,14 @@ function move () {
     90
     )
 }
+let reading = 0
 let dir = 0
 let dist = 0
 let deg = 0
 let mindist = 0
 let stopKey = 0
 stop()
+let prevReading = 1023
 stopKey = 1
 basic.showArrow(ArrowNames.West)
 let strip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
@@ -103,15 +105,24 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (input.lightLevel() < 1) {
-        strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Red))
-        strip.setPixelColor(1, neopixel.colors(NeoPixelColors.Blue))
-        strip.setPixelColor(2, neopixel.colors(NeoPixelColors.Blue))
-        strip.setPixelColor(3, neopixel.colors(NeoPixelColors.Red))
-        strip.show()
-        basic.pause(5000)
-    } else {
-        strip.clear()
-        strip.show()
+    reading = pins.analogReadPin(AnalogPin.P2)
+    led.plotBarGraph(
+    reading,
+    1023
+    )
+    // 30 is an enough difference to avoid an engines sound effects .
+    if (reading - prevReading > 30) {
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        stop()
+        basic.pause(100)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        moveBack()
+        basic.pause(100)
+        stop()
+        basic.pause(100)
     }
+    prevReading = reading
+})
+basic.forever(function () {
+	
 })
